@@ -12,14 +12,14 @@ if(TARGET CURL::libcurl)
   target_link_libraries(
     opentelemetry_http_client_curl
     PUBLIC opentelemetry_ext
-    PRIVATE CURL::libcurl)
+    PRIVATE CURL::libcurl opentelemetry_common)
 else()
   target_include_directories(opentelemetry_http_client_curl
                              INTERFACE "${CURL_INCLUDE_DIRS}")
   target_link_libraries(
     opentelemetry_http_client_curl
     PUBLIC opentelemetry_ext
-    PRIVATE ${CURL_LIBRARIES})
+    PRIVATE ${CURL_LIBRARIES} opentelemetry_common)
 endif()
 
 if(OPENTELEMETRY_INSTALL)

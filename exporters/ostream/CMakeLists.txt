@@ -46,7 +46,7 @@ target_include_directories(
   opentelemetry_exporter_ostream_metrics
   PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>")
 target_link_libraries(opentelemetry_exporter_ostream_metrics
-                      PUBLIC opentelemetry_metrics)
+                      PUBLIC opentelemetry_metrics opentelemetry_resources)
 
 if(OPENTELEMETRY_INSTALL)
   install(

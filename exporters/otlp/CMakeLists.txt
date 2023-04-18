@@ -33,7 +33,7 @@ if(WITH_OTLP_GRPC)
                         PROPERTIES EXPORT_NAME otlp_grpc_client)
   target_link_libraries(
     opentelemetry_exporter_otlp_grpc_client
-    PUBLIC opentelemetry_sdk opentelemetry_ext opentelemetry_proto)
+    PUBLIC opentelemetry_sdk opentelemetry_ext opentelemetry_proto opentelemetry_common)
 
   target_link_libraries(opentelemetry_exporter_otlp_grpc_client
                         PRIVATE gRPC::grpc++)
@@ -61,7 +61,8 @@ if(WITH_OTLP_GRPC)
   target_link_libraries(
     opentelemetry_exporter_otlp_grpc
     PUBLIC opentelemetry_otlp_recordable
-           opentelemetry_exporter_otlp_grpc_client)
+           opentelemetry_exporter_otlp_grpc_client
+    PRIVATE gRPC::grpc++)
 
   list(APPEND OPENTELEMETRY_OTLP_TARGETS opentelemetry_exporter_otlp_grpc)
 
@@ -90,7 +91,8 @@ if(WITH_OTLP_GRPC)
   target_link_libraries(
     opentelemetry_exporter_otlp_grpc_metrics
     PUBLIC opentelemetry_otlp_recordable
-           opentelemetry_exporter_otlp_grpc_client)
+           opentelemetry_exporter_otlp_grpc_client
+    PRIVATE gRPC::grpc++)
 
   list(APPEND OPENTELEMETRY_OTLP_TARGETS
        opentelemetry_exporter_otlp_grpc_metrics)
@@ -103,7 +105,7 @@ if(WITH_OTLP_HTTP)
   target_link_libraries(
     opentelemetry_exporter_otlp_http_client
     PUBLIC opentelemetry_sdk opentelemetry_proto opentelemetry_http_client_curl
-           nlohmann_json::nlohmann_json)
+           nlohmann_json::nlohmann_json opentelemetry_common)
   if(nlohmann_json_clone)
     add_dependencies(opentelemetry_exporter_otlp_http_client
                      nlohmann_json::nlohmann_json)
